@@ -20,7 +20,6 @@ function Nav(props) {
               <Link href="/items">
                 <a>Shop</a>
               </Link>
-
               {
                 me && (
                   <>

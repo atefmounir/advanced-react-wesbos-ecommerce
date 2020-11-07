@@ -33,6 +33,7 @@ type User{
   updatedAt: DateTime!
   createdAt: DateTime!
   cart:[CartItem!]!
+  orders:[OrderItem]
 }
 
 type SuccessMessage{
