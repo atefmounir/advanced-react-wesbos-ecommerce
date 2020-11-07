@@ -1,0 +1,73 @@
+# import * from './generated/prisma.graphql'
+
+type Mutation{
+  createItem(data:CreateItemInput!):Item!
+  updateItem(id:ID!,data:UpdateItemInput):Item!
+  deleteItem(id:ID!):Item!
+  signup(data:SignupInput!): User!
+  signIn(data:SignInInput!): User!
+  signout:SuccessMessage
+  requestReset(email:String!):SuccessMessage
+  resetPassword(data:resetPasswordInput!): User!
+  updatePermissions(permissions:[Permission], userId:ID!): User
+  addToCart(id:ID!): CartItem
+  removeFromCart(id:ID!): CartItem
+  createOrder(token:String!): Order!
+}
+
+type Query{
+  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int,  first: Int): [Item]!
+  item(where: ItemWhereUniqueInput!): Item!
+  itemsConnection(where: ItemWhereInput): ItemConnection!
+  me:User
+  users:[User]!
+  order(id:ID!) : Order
+  orders(orderBy: OrderOrderByInput): [Order]!
+}
+
+type User{
+  id: ID!
+  name: String!
+  email: String!
+  permissions: [Permission!]!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+  cart:[CartItem!]!
+}
+
+type SuccessMessage{
+  message: String
+}
+
+input CreateItemInput{
+  title: String!
+  description: String!
+  image: String
+  largeImage: String
+  price: Int!
+}
+
+input UpdateItemInput{
+  title: String
+  description: String
+  price: Int
+}
+
+input SignupInput{
+  email: String!
+  password: String!
+  name: String!
+}
+
+input SignInInput{
+  email: String!
+  password: String!
+}
+
+input resetPasswordInput{
+  resetToken: String!
+  password: String!
+  confirmPassword: String!
+}
+
+
