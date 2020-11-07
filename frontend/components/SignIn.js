@@ -40,12 +40,12 @@ class SignIn extends Component {
           {query:CURRENT_USER_QUERY}
           ]}>
         {
-          (signIn,{error,loading})=>{
+          (signup,{error,loading})=>{
 
             return(
               <Form method="post" onSubmit={async (e)=>{
                 e.preventDefault();
-                const res=await signIn()
+                await signup()
                 this.setState({password:"",email:""})
               }}>
                 <fieldset disabled={loading} aria-busy={loading}>
