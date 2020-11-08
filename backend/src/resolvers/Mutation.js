@@ -82,7 +82,8 @@ const Mutations = {
       token, {                                            //get a response from the server with a cookie after a successful request
       httpOnly:true,                                      //inhibit access from javascript
       maxAge:1000*60*60*24*365,                           //1 year validity
-      secure: true
+      secure: true,
+      sameSite:'none'
     })
 
     return user                                           //return user to browser
