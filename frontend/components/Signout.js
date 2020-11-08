@@ -11,6 +11,7 @@ const SIGN_OUT_MUTATION =gql`
       message
     }
   }
+ 
 `
 
 
