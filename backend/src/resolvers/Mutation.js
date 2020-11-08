@@ -119,7 +119,12 @@ const Mutations = {
     return user                                           //get the logged in user
   },
   signout(parent,args,{prisma,response},info){
-    response.clearCookie('token')                   //clear the token when sing out is requested
+    response.clearCookie('token',{           //clear the token when sing out is requested
+      httpOnly: true,
+      secure: process.env.NODE_ENV==='production'
+          ? 'true':'false',
+      sameSite:'none'
+    })
 
     return {message: "Goodbye"}                           //return a message on completion as we defined for this schema in schema.graphql file
   },
