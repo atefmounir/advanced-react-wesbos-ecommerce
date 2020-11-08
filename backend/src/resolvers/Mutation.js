@@ -83,7 +83,7 @@ const Mutations = {
       httpOnly:true,                                      //inhibit access from javascript
       maxAge:1000*60*60*24*365,                           //1 year validity
       secure: true,
-      sameSite:false
+      sameSite:'none'
     })
 
     return user                                           //return user to browser
