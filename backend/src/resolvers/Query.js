@@ -48,7 +48,7 @@ const Query = {
     const hasPermissionToSee=
       request.user.permissions.includes('ADMIN')         //check if the user is admin. Note: user is a global variable like userId
 
-    if(!ownsOrder || !hasPermissionToSee){               //user has to be the owner of the order or has admin permission to see the order
+    if(!ownsOrder && !hasPermissionToSee){               //user has to be the owner of the order or has admin permission to see the order
       throw new Error('You are not authorized to see this order')
     }
 
