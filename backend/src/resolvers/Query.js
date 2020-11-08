@@ -5,16 +5,16 @@ const {hasPermission} =require('../utils')               //util functions
 
 
 const Query = {
-  items:forwardTo('prisma'),                   //items is the query name in schema.graphql file and is matching same name in prisma.graphql file
-  item:forwardTo('prisma'),                    //item is the query name in schema.graphql file and is matching same name in prisma.graphql file
-  itemsConnection:forwardTo('prisma'),         //aggregation for pagination
-  me(parent,args, {prisma,request},info){                 //ctx has access to request & response of any http
+  items:forwardTo('prisma'),                  //items is the query name in schema.graphql file and is matching same name in prisma.graphql file
+  item:forwardTo('prisma'),                   //item is the query name in schema.graphql file and is matching same name in prisma.graphql file
+  itemsConnection:forwardTo('prisma'),        //aggregation for pagination
+  me(parent,args, {prisma,request},info){                //ctx has access to request & response of any http
     if(!request.userId){
       return null
     }
-    return prisma.query.user({                            //user is an API type Query in prisma.graphql file
+    return prisma.query.user({                           //user is an API type Query in prisma.graphql file
       where:{
-        id:request.userId                                 //userId is loaded with a successful response from the server over the req object. check index.js
+        id:request.userId                                //userId is loaded with a successful response from the server over the req object. check index.js
       }
     },info)
   },

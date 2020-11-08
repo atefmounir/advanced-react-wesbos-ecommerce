@@ -1,6 +1,6 @@
 const cookieParser = require('cookie-parser')                //middleware to handle cookies for JWT
 const jwt=require('jsonwebtoken')                            //jwt for decoding the token
-require('dotenv').config({path:'variables.env'})   //dotenv package for environment variables
+require('dotenv').config({path:'variables.env'})      //dotenv package for environment variables
 
 const createServer=require('./createServer')                 //for Node GraphQL Yoga server
 const prisma=require('./prisma')                             //for DB interface between Node and DB through Prisma GraphQL API

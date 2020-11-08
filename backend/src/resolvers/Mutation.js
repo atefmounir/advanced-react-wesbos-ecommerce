@@ -24,7 +24,7 @@ const Mutations = {
         },
         ...args.data                                      //data is the object that holds CreateItemInput. review schema.graphql
       }
-    }, info)                                       //info is used for inform the function what to return
+    }, info)                                              //info is used for inform the function what to return
   },
   async updateItem(parent,args,{prisma},info){
     const updates ={...args.data}                         //copy the new input field from client
@@ -54,7 +54,7 @@ const Mutations = {
       throw new Error('You don\'t have permission to delete this item!')
     }
 
-    return await prisma.mutation.deleteItem({    //release to delete is ok
+    return await prisma.mutation.deleteItem({       //release to delete is ok
       where: {
         id:args.id
       }
@@ -73,8 +73,8 @@ const Mutations = {
       }
     },info)
     const token= jwt.sign(                                //create the token
-        {userId:user.id},                       //take the id from the created user in prisma
-      process.env.APP_SECRET         //add the secret key
+        {userId:user.id},                          //take the id from the created user in prisma
+      process.env.APP_SECRET                              //add the secret key
     )
     response.cookie('token',
       token, {                                            //get a response from the server with a cookie after a successful request
