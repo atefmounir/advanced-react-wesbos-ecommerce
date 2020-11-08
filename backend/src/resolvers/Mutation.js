@@ -82,8 +82,9 @@ const Mutations = {
       token, {                                            //get a response from the server with a cookie after a successful request
       httpOnly:true,                                      //inhibit access from javascript
       maxAge:1000*60*60*24*365,                           //1 year validity
-      secure: process.env.NODE_ENV==='production' ? 'true':'false',
-      sameSite:'none'
+      secure: process.env.NODE_ENV==='production'         //secure is required for production
+        ? 'true':'false',
+      sameSite:'none'                                     //for sending cookies across remote url. express package is required
     })
 
     return user                                           //return user to browser
@@ -109,13 +110,16 @@ const Mutations = {
     )
     response.cookie('token', token, {                     //get a response from the server with a cookie after a successful request
       httpOnly:true,                                      //inhibit access from javascript
-      maxAge:1000*60*60*24*365                            //1 year validity
+      maxAge:1000*60*60*24*365,                           //1 year validity
+      secure: process.env.NODE_ENV==='production'         //secure is required for production
+          ? 'true':'false',
+      sameSite:'none'
     })
 
     return user                                           //get the logged in user
   },
   signout(parent,args,{prisma,response},info){
-    response.clearCookie('token')                   //clear the token when sigout is requested
+    response.clearCookie('token')                   //clear the token when sing out is requested
 
     return {message: "Goodbye"}                           //return a message on completion as we defined for this schema in schema.graphql file
   },
