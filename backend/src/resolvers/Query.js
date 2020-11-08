@@ -5,16 +5,16 @@ const {hasPermission} =require('../utils')               //util functions
 
 
 const Query = {
-  items:forwardTo('prisma'),               //items is the query name in schema.graphql file and is matching same name in prisma.graphql file
-  item:forwardTo('prisma'),                //item is the query name in schema.graphql file and is matching same name in prisma.graphql file
-  itemsConnection:forwardTo('prisma'),     //aggregation for pagination
-  async me(parent,args, {prisma,request},info){          //ctx has access to request & response of any http
+  items:forwardTo('prisma'),                   //items is the query name in schema.graphql file and is matching same name in prisma.graphql file
+  item:forwardTo('prisma'),                    //item is the query name in schema.graphql file and is matching same name in prisma.graphql file
+  itemsConnection:forwardTo('prisma'),         //aggregation for pagination
+  me(parent,args, {prisma,request},info){                 //ctx has access to request & response of any http
     if(!request.userId){
       return null
     }
-    return await prisma.query.user({                     //user is an API type Query in prisma.graphql file
+    return prisma.query.user({                            //user is an API type Query in prisma.graphql file
       where:{
-        id:request.userId                                //userId is loaded with a successful response from the server over the req object. check index.js
+        id:request.userId                                 //userId is loaded with a successful response from the server over the req object. check index.js
       }
     },info)
   },
@@ -23,13 +23,13 @@ const Query = {
       throw new Error('You must be logged in')
     }
     hasPermission(                                       //check that user has specific permissions to query for all users.
-      request.user,                               //user is populating on each client request as what userId was prepared same way . check index.js
+      request.user,                                      //user is populating on each client request as what userId was prepared same way . check index.js
       ['ADMIN','PERMISSIONUPDATE']
     )
 
     return await prisma.query.users({
 
-    },info)                                       //info will contains fields that frontend is requested
+    },info)                                              //info will contains fields that frontend is requested
   },
   async order(parent,args, {prisma,request},info){
     if(!request.userId){                                 //check that user is logged in
